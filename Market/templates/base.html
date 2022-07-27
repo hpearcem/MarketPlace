@@ -1,0 +1,81 @@
+<!--TODO make home and admin buttons appear only when not on home page or when the admin is logged on
+Sihnup button?-->
+
+<!--This is a base template for all the pages-->
+{% load static %}  <!--Loads all static files like css files-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Order Platform{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Below we pull in all the CDN links for bootstrap to work-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<nav class="one-edge-shadow
+  navbar navbar-light
+  sticky-top navbar 
+  navbar-expand-lg
+  text-white">
+    <a class="navbar-brand ms-3 text-dark " href="/">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" style="width:50px;height:50px,color:text-light;">E-Commerce</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/store">Store <span class="sr-only">(current)</span></a>
+        </li>
+
+          </ul>
+
+
+
+
+      <ul class=" navbar-nav my-2 my-lg-0">
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/cart">Cart 
+            <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
+            <span class="sr-only">(current)</span></a>
+        </li>
+
+        {% if request.session.customer %}
+        
+        <li class="nav-item active ">
+          <a class="nav-link" href="/orders">Orders<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active ">
+          <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+       
+        <li class="nav-item active">
+          <a class="nav-link" href="/signup">Signup<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
+
+
+      </ul>
+
+
+    </div>
+  </nav>
+  <!---->
+  {% block content %}{% endblock %}
+</html>
