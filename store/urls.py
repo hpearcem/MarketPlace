@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home
+from .views.home import Index, store
 
 app_name = 'Market'  # Adds a namespace to the app
 
 urlpatterns = [
-    path('', home.post, name='home'),
+    path('', Index.as_view(), name='home'),
+    path('store', store , name='store'),
     ]
 
