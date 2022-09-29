@@ -1,44 +1,26 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.views import View
+from django.shortcuts import render
+from django.views.generic.base import View
 from store.models.product import Products
-from store.models.category import Category
-# from django.views.decoretors.http import require_POST, require_GET, login_reuired
+from django.core import serializers
 
 
-class Index(View):
-    # @require_POST
-    def post(self, request):
-        post = request.POST.get('product')
-        remove = request.POST.get('remove')
-        cart = request.session.get('cart')
-        return redirect('home')
-
-    # @require_GET
-    def get(self, request):
-        return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
-
-
-def store(request):
-    """The function assigns the cart, and if there is no cart it opens an empty
-    dictionary. If a category is chosen it will return all the products in the
-    category else just all the products"""
-    cart = request.session.get('cart')
-    if not cart:
-        request.session['cart'] = {}
-    products = None
-    categories = Category.get_all_categories()
-    categoryID = request.GET.get('category')
-    if categoryID:
-        products = Products.get_all_products_by_categoryid(categoryID)
-    else:
-        products = Products.get_all_products()
-
+class IndexView(View):
+    """IndexView is the view for the index.html page, this is the home page
+    Variables:
+        products - a queryset of all products in the database.
+        data - initialize a dictionary to fill with products for display on the home page"""
+    products = Products.get_all_products()
     data = {}
-    data['products'] = products
-    data['categories'] = categories
 
-    print('you are : ', request.session.get('email'))
-    return render(request, 'index.html', data)
-
-
-
+    def get(self, request, *args, **kwargs):
+        """This handles the GET request sent from the browser and renders the index.html
+        template.
+         Variables:
+             product_id - Gets the product id from the template when a product is clicked
+             details - uses the product id from the details product and gets the product queryset from the database
+             context - This is the dictionary object sent to the render the homepage"""
+        product_id = request.GET.get('chosen_product', '2')
+        details = Products.get_products_by_id(str(product_id))
+        self.data['products'] = self.products
+        context = {'product': self.data, 'details': details}
+        return render(request, 'index.html', context)

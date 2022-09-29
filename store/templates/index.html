@@ -1,0 +1,89 @@
+{% extends "./base.html" %}  <!--This pulls in the base template-->
+{% load static %}
+{% block title %}Home{% endblock %} <!--Override the base title to the page title-->
+{% block content %}
+<style>
+    .wrap{
+      position: relative;
+    }
+    .wrap a{
+      position: absolute;
+      width:100%;
+      height:100%;
+      top:0px;
+      left:0px;
+    }
+
+    #right {
+    position: fixed;
+    }
+
+    #image {
+    height: 100px;
+    }
+
+
+</style>
+
+<main class="d-flex flex-nowrap">
+    <div class="container-fluid">
+        <div class="row h-100">
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div id="left" class="list-group list-group-flush border-bottom scrollarea">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            {% for product in product.products %}
+                            <!--For loop for looping through the products-->
+                            <!-- the loop will fill columns with product detail-->
+                            <form method="GET" action="" id="chosen_product">
+                                <button type="submit" value="{{ product.id }}" name="chosen_product">
+                                    <div class="wrap">
+                                        <div class="col">
+                                            <div class="card mb-4 rounded-3 shadow-sm {{forloop.counter0}}">
+                                                <div class="card-header py-3">
+                                                    <h4 class="my-0 fw-normal">{{product.name}}</h4>
+                                                    <!--links to the product image-->
+                                                    <img class="img-fluid" id="image" alt="Responsive image"
+                                                         src="{{ product.image.url }}">
+                                                    <div class="card-body">
+                                                        <h1 class="card-title pricing-card-title">
+                                                            R{{product.price}}</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </form>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="container-fluid" id="right">
+                    <div class="wrap">
+                        <div class="col">
+                            <div class="card mb-4 rounded-3 shadow-sm">
+                                <div class="card-header py-3">
+                                    <h4 class="my-0 fw-normal">{{details.name}}</h4>
+                                    <!--links to the product image-->
+                                    <img class="img-fluid" id="chosenImage" alt="Responsive image"
+                                         src="{{ details.image.url }}">
+                                    <div class="card-body">
+                                        <h1 class="card-title pricing-card-title">
+                                            R{{details.price}}</h1>
+                                        <p>{{ details.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</main>
+{% endblock %}

@@ -1,7 +1,9 @@
 from django.db import models
+
 from .category import Category
-import DateTime
-#TODO add check to return only products that are active ?? Is this necesarry
+
+
+# TODO add check to return only products that are active ?? Is this necesarry
 
 class Products(models.Model):
     """A table for all the products to be sold
@@ -23,37 +25,40 @@ class Products(models.Model):
         get_all_products_by_category_id - does a product search using the category id
         __str__ - returns the name as a string"""
     name = models.CharField(max_length=60)
-    price = models.DecimalField(max_digits=8,decimal_places=2,
+    slug = models.SlugField()
+    price = models.DecimalField(max_digits=8, decimal_places=2,
                                 default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     description = models.CharField(
-		max_length=250, default='', blank=True, null=True)
+        max_length=250, default='', blank=True, null=True)
     image = models.ImageField(upload_to='media/products/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    receive_date = models.DateTimeField(auto_now_add=True)  # 
+    receive_date = models.DateTimeField(auto_now_add=True)  #
     cost = models.DecimalField(max_digits=8,
-                               decimal_places=2) 
+                               decimal_places=2)
     is_active = models.BooleanField(default=True)
 
     class Meta:
         """Meta data instructions"""
-        verbose_name_plural = "Products" # 
+        verbose_name_plural = "Products"
 
     @staticmethod
     def get_products_by_id(ids):
-    	return Products.objects.filter(id__in=ids)
+        """Returns a queryset with the product selected by ID"""
+        return Products.objects.get(id__in=ids)
 
     @staticmethod
     def get_all_products():
-	    return Products.objects.all()
+        """Returns a queryset with all the products in the database"""
+        return Products.objects.all()
 
     @staticmethod
     def get_all_products_by_categoryid(category_id):
-	    if category_id:
-	    	return Products.objects.filter(category=category_id)
-	    else:
-	    	return Products.get_all_products()
+        """Returns a queryset with all the products with a specified category id,
+        if the category id does not exist all products are returned"""
+        if category_id:
+            return Products.objects.filter(category=category_id)
+        else:
+            return Products.get_all_products()
 
     def __str__(self) -> str:
-        return self.name    
-
+        return self.name

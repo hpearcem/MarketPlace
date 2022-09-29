@@ -10,12 +10,11 @@ class Category(models.Model):
 
     @staticmethod
     def get_all_categories():
-    	return Category.objects.all()
-    
+        return Category.objects.all()
+
     class Meta:
         """ Meta data instructions """
         verbose_name_plural = 'categories'  # Stops Django from adding an s after category
 
     def __str__(self):
-    	return self.name
-
+        return self.name
