@@ -23,6 +23,7 @@
     }
 
 
+
 </style>
 
 <main class="d-flex flex-nowrap">
@@ -60,20 +61,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="container-fluid" id="right">
-                    <div class="wrap">
-                        <div class="col">
-                            <div class="card mb-4 rounded-3 shadow-sm">
-                                <div class="card-header py-3">
-                                    <h4 class="my-0 fw-normal">{{details.name}}</h4>
-                                    <!--links to the product image-->
-                                    <img class="img-fluid" id="chosenImage" alt="Responsive image"
-                                         src="{{ details.image.url }}">
-                                    <div class="card-body">
-                                        <h1 class="card-title pricing-card-title">
-                                            R{{details.price}}</h1>
-                                        <p>{{ details.description }}</p>
+            <div class="col-md-4">
+                <div class="row-sm-4 h-100">
+                    <div class="container-fluid" id="right">
+                        <div class="wrap">
+                            <div class="col">
+                                <div class="card mb-4 rounded-3 shadow-sm" style="width:30rem;">
+                                    <div class="card-header py-3">
+                                        <h4 class="my-0 fw-normal">{{details.name}}</h4>
+                                        <!--links to the product image-->
+                                        <div class="container-fluid h-100 w-100">
+                                        <img class="img-fluid" id="chosenImage" alt="Responsive image"
+                                             src="{{ details.image.url }}">
+                                        </div>
+                                        <div class="card-body">
+                                            <h1 class="card-title pricing-card-title">
+                                                R{{details.price}}</h1>
+                                            <p>{{ details.description }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
