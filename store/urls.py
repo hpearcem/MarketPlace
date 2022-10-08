@@ -1,8 +1,9 @@
 from django.urls import path, reverse
-from .views.home import IndexView
+from .views import home
 
 app_name = 'Market'  # Adds a namespace to the app
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='index'),
-]
+    path('', home.index, name='index'),
+    path('/<>/', home.category_selector, name='category_list'),
+    ]
