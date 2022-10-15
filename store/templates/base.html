@@ -37,27 +37,28 @@
                     <li class="nav-item active">
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <!--A drop down button to select suppliers to access their products-->
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Category
-                            </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'Market:index' %}">All</a></li>
-                            {% for category in categories %}
-                            <li><a class="selected" href="#">Another action</a></li>
-                            {% endfor %}
-                        </ul>
-                        </form>
+                    <form action='' method='post' onclick="submit">
+                        {% csrf_token %}
 
+                        {{form}}
+                        <button class="btn" action="submit">Pres</button>
+                    </form>
+                </ul>
             </div>
-            </ul>
-
-        </div>
         </div>
     </nav>
 </header>
+<script>
+    var e = document.getElementById("ddlViewBy");
+    function onChange() {
+        var value = e.value;
+        var text = e.options[e.selectedIndex].text;
+        }
+    e.onchange = onChange;
+    onChange();
+
+
+</script>
 <div id="content">{% block content %} {% endblock %}</div>
 </body>
 </html>

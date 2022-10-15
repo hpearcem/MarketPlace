@@ -1,13 +1,20 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View, HttpResponse
 from store.models.product import Products, Category
+from django.views.generic.edit import CreateView
+from store.forms import CategoryForm
 
 
 def index(request):
-    products = Products.get_all_products()
+    if request.method == 'POST':
+        products = get_category(request)
+        print(products)
+    else:
+        products = Products.get_all_products()
+    form = CategoryForm
     data = {'products': products}
     detail = details(request)
-    context = {'product': data, 'details': detail}
+    context = {'product': data, 'details': detail, 'form': form}
     return render(request, 'index.html', context)
 
 
@@ -17,11 +24,14 @@ def details(request):
     return product_detail
 
 
-def category_selector(request):
-    categories = Category.get_all_categories()
-    category_id = request.GET.get('category', 'all')
-    products = Products.get_all_products_by_categoryid(category_id)
-    cat_list = {'categories': categories}
-    context = {'categories': cat_list, 'product': products}
-    return render(request, 'index/category.html', context)
-
+def get_category(request):
+    form = CategoryForm(request.POST)
+    if form.is_valid():
+        category_id = request.POST.get('model_choice')
+        print(category_id)
+        for selection in Category.get_category_by_id(category_id):
+            if selection.name == 'all':
+                products = Products.get_all_products()
+            else:
+                products = Products.get_all_products_by_categoryid(category_id)
+        return products
