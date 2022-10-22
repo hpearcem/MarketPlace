@@ -1,0 +1,33 @@
+ValueError: dictionary update sequence element #0 has length 1; 2 is required
+{% extends "./base.html" %}  <!--This pulls in the base template-->
+{% load static %}
+{% block title %}Home{% endblock %} <!--Override the base title to the page title-->
+{% block content %}
+<style>
+    .wrap{
+      position: relative;
+    }
+    .wrap a{
+      position: absolute;
+      width:100%;
+      height:100%;
+      top:0px;
+      left:0px;
+    }
+
+    #right {
+    position: fixed;
+    }
+
+    #image {
+    height: 100px;
+    }
+
+
+
+</style>
+
+<main class="d-flex flex-nowrap">
+
+</main>
+{% endblock %}

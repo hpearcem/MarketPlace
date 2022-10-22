@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
         <!--Navigation bar at the top of the page to be visible on all pages-->
         <div class="container-fluid"> <!--container for the header Elements-->
-            <a class="navbar-brand" href="#">Marketplace</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,31 +34,33 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <!--A list of the links on the header bar-->
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
-                    </li>
-                    <form action='' method='post' onclick="submit">
+                    <form action='' method='post'>
                         {% csrf_token %}
-
                         {{form}}
-                        <button class="btn" action="submit">Pres</button>
+                        <button class="btn btn-info">Submit</button>
                     </form>
                 </ul>
             </div>
+
+
+            <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a class="p-2 text-dark" href="basket/">Basket</a>
+                {% if user.is_authenticated %}
+                Hi {{ user.username }}!
+                <a class="p-2 text-dark" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+
+                <a class="p-2 text-dark" href="{% url 'login' %}">Sign in</a>
+            </nav>
+            <a class="btn btn-outline-primary" href="registration/signup/">Sign up</a>
         </div>
+        {% endif %}
+
+
     </nav>
 </header>
-<script>
-    var e = document.getElementById("ddlViewBy");
-    function onChange() {
-        var value = e.value;
-        var text = e.options[e.selectedIndex].text;
-        }
-    e.onchange = onChange;
-    onChange();
 
-
-</script>
 <div id="content">{% block content %} {% endblock %}</div>
 </body>
 </html>

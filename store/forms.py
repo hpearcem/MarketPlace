@@ -6,8 +6,12 @@ choices = Category.get_all_categories()
 
 
 class CategoryForm(forms.Form):
-    model_choice = forms.ModelChoiceField(
+    Choose_Category = forms.ModelChoiceField(
         queryset=choices,
         initial=0
         )
+
+
+class QuantitySelect(forms.Form):
+    quantity = forms.IntegerField(min_value=0)
 
