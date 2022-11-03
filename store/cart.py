@@ -1,0 +1,73 @@
+from django.conf import settings
+from .models.product import Products
+from decimal import Decimal
+
+
+class Cart(object):
+    """This is a base class for the shopping cart"""
+    def __init__(self, request):
+        self.request = request # A request object to use in the Cart class
+        self.session = request.session # A session object that contains cart details
+        cart = self.session.get(settings.CART_SESSION_ID)
+        if not cart:
+            cart = self.session[settings.CART_SESSION_ID] = {}
+        self.cart = cart
+        self.line_total = 0
+
+    def add(self, product, quantity=1, action=None):
+        product_id = product.id
+        newItem = True
+
+        if str(product.id) not in self.cart.keys():
+            self.line_total = 0
+            self.cart[product.id] = {
+                'userid': self.request.user.id,
+                'product_id': product_id,
+                'name': product.name,
+                'price': str(product.price),
+                'quantity': quantity,
+                'line_total': str(float(product.price) * int(quantity))
+            }
+
+        else:
+            newItem = True
+            for key, value in self.cart.items():
+                if key == str(product.id):
+                    value['quantity'] = str(int(value['quantity']) + int(quantity))
+                    value['line_total'] = str(float(value['price']) * int(value['quantity']))
+                    newItem = False
+                    self.save()
+                    break
+
+            if newItem:
+                self.line_total = 0
+                self.cart[product.id] = {
+                    'userid': self.request,
+                    'product_id': product.id,
+                    'name': product.name,
+                    'quantity': quantity,
+                    'price': str(product.price),
+                    'line_total': str(float(product.price) * int(quantity))
+                }
+
+        self.save()
+
+    def save(self):
+        self.session[settings.CART_SESSION_ID] = self.cart
+        self.session.modified = True
+
+    def get_total_price(self):
+        return sum(float(item['price']) * int(item['quantity']) for item in self.cart.values())
+
+    def remove(self, request, product):
+        product_id = str(product.id)
+        print(product_id, product, type(product_id), type(product))
+        if product_id in request.session['cart'].keys():
+            del self.cart[product_id]
+            self.save()
+
+    def clear(self):
+        self.session[settings.CART_SESSION_ID] = {}
+        self.session.modified = True
+
+

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'crispy_forms',
+    'cart',
 ]
 
 
@@ -66,13 +67,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'cart.context_processor.cart_total_amount'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'Market.wsgi.application'
-
+CART_SESSION_ID = 'cart'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

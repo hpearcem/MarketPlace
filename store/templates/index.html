@@ -79,11 +79,11 @@
                                                 R{{details.price}}</h1>
                                             <p>{{ details.description }}</p>
                                         </div>
-                                        <form action='' method='post'>
-                        {% csrf_token %}
-                        {{ quantity_selector }}
-                        <button class="btn btn-info">Submit</button>
-                    </form>
+                                        <form action='' method='post' name="quantity_selector">
+                                        {% csrf_token %}
+                                        {{ quantity_selector }}
+                                        <button class="btn btn-info" name="quantity_selector">Submit</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

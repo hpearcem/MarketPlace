@@ -1,4 +1,4 @@
-from django.urls import path, reverse
+from django.urls import path
 from .views import home, orders, auth
 
 
@@ -6,6 +6,9 @@ app_name = 'Market'  # Adds a namespace to the app
 
 urlpatterns = [
     path('', home.index, name='index'),
-    path('basket/', orders.view_basket, name='basket'),
     path("registration/signup/", auth.SignUpView.as_view(), name="signup"),
+    path('add/<int:id>/', orders.cart_add, name='cart_add'),
+    path('cart/item_clear/<int:id>/', orders.item_clear, name='item_clear'),
+    path('cart_clear/', orders.cart_clear, name='cart_clear'),
+    path('cart_detail/', orders.cart_detail, name='cart_detail'),
     ]

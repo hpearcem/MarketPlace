@@ -31,6 +31,8 @@
                 <span class="navbar-toggler-icon"></span>
                 <!--This is a button that appears when the page is narowed to give access to the naavbar options-->
             </button>
+            {% if request.path == "/" %}
+
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <!--A list of the links on the header bar-->
@@ -41,11 +43,11 @@
                     </form>
                 </ul>
             </div>
-
+            {% endif %}
 
             <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-dark" href="basket/">Basket</a>
+                <a class="p-2 text-dark" href="cart_detail/">Cart</a>
                 {% if user.is_authenticated %}
                 Hi {{ user.username }}!
                 <a class="p-2 text-dark" href="{% url 'logout' %}">Logout</a>

@@ -24,10 +24,9 @@ class Products(models.Model):
         get_al_products - gets a queryset of all products
         get_all_products_by_category_id - does a product search using the category id
         __str__ - returns the name as a string"""
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=255)
     slug = models.SlugField()
-    price = models.DecimalField(max_digits=8, decimal_places=2,
-                                default=0)
+    price = models.FloatField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     description = models.CharField(
         max_length=250, default='', blank=True, null=True)
