@@ -47,7 +47,11 @@
 
             <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="p-2 text-dark" href="cart_detail/">Cart</a>
+                {% if request.path == '/' %}
+                <a class="p-2 text-dark" href="{% url 'Market:cart_detail' %}">Cart</a>
+                {% else %}
+                <a class="p-2 text-dark" href="{% url 'Market:index' %}">Home</a>
+                {% endif %}
                 {% if user.is_authenticated %}
                 Hi {{ user.username }}!
                 <a class="p-2 text-dark" href="{% url 'logout' %}">Logout</a>
@@ -55,7 +59,7 @@
 
                 <a class="p-2 text-dark" href="{% url 'login' %}">Sign in</a>
             </nav>
-            <a class="btn btn-outline-primary" href="registration/signup/">Sign up</a>
+            <a class="btn btn-outline-primary" href="{% url 'Market:signup' %}">Sign up</a>
         </div>
         {% endif %}
 

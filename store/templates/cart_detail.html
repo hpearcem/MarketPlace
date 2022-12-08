@@ -42,6 +42,16 @@
 
     <div class="col-12 text-end">
       <div class="h6 fw-bold">Sub Total: R<div id="subtotal" class="d-inline-flex">{{cart.get_total_price}}</div></div>
+
+        <form action="invoice/" method="post">
+          {% csrf_token %}
+        <button class="btn btn-outline-secondary btn-sm" type="submit" name="invoice" value="invoice">
+                  Invoice
+                </button>
+        </form>
+
+
+
     </div>
   </div>
 </main>

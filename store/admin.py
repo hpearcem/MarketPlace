@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models.product import Products
 from .models.category import Category
+from .models.order import Order, CartItem
 
 
 @admin.register(Products)
@@ -18,8 +19,12 @@ class CategoryRegister(admin.ModelAdmin):
     pass
 
 
-"""@admin.register(Order)
+@admin.register(Order)
 class OrderRegister(admin.ModelAdmin):
-    date_hierarchy = "order_date"
-    """
+    date_hierarchy = "created"
+
+
+@admin.register(CartItem)
+class CartItemRegister(admin.ModelAdmin):
+    pass
 
