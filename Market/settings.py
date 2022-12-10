@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store',
-    'crispy_forms',
-    'cart',
+    'store',  # Show store as an installed app
+    'cart',  # Show cart as an installed app
 ]
 
 
@@ -59,7 +58,7 @@ ROOT_URLCONF = 'Market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../store/templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../store/templates')],  # Shows location of template files
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,14 +66,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'cart.context_processor.cart_total_amount'
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'Market.wsgi.application'
-CART_SESSION_ID = 'cart'
+CART_SESSION_ID = 'cart'  # Session ID for Cart
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -130,5 +128,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = "/media/"  # Url for the media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # Root file for Media

@@ -21,9 +21,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('store.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('store.urls')),  # Includes the store app's URL file in the path
+    path('accounts/', include('django.contrib.auth.urls')),  # allows using django built in auth framework
 ]
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # registers the media url in debug mode
 

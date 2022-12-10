@@ -21,9 +21,6 @@
     #image {
     height: 100px;
     }
-
-
-
 </style>
 
 <main class="d-flex flex-nowrap">
@@ -34,8 +31,7 @@
                     <div id="left" class="list-group list-group-flush border-bottom scrollarea">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                             {% for product in product.products %}
-                            <!--For loop for looping through the products-->
-                            <!-- the loop will fill columns with product detail-->
+                            <!--For loop for looping through the products to be used in the product display boxes-->
                             <form method="GET" action="" id="chosen_product">
                                 <button type="submit" value="{{ product.id }}" name="chosen_product">
                                     <div class="wrap">
@@ -80,6 +76,7 @@
                                             <p>{{ details.description }}</p>
                                         </div>
                                         <form action='' method='post' name="quantity_selector">
+                                            <!--Selector box to add quantities-->
                                         {% csrf_token %}
                                         {{ quantity_selector }}
                                         <button class="btn btn-info" name="quantity_selector">Submit</button>

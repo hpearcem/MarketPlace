@@ -4,10 +4,24 @@ from decimal import Decimal
 
 
 class Cart(object):
-    """This is a base class for the shopping cart"""
+    """This is a base class for the shopping cart
+    attributes:
+        request: A request object to use in the Cart class
+        session: A session object that contains cart details
+        cart: the cart object from the session, or if none exists one is created
+        line_total: the total of the product price times the quantity that was added to the cart
+        Methods:
+            add: adds the chosen product to the cart and sets it as the new item. A check is doe to see
+            if the product already exists in the cart, if so the quantity is just added to the existing
+            entry. Else a new entry is created.
+            save: Saves the cart to the session
+            get_total_price: Returns the total of all the products * quantity in the cart.
+            remove: removes an item from the cart
+            clear: clears the whole cart
+        """
     def __init__(self, request):
-        self.request = request # A request object to use in the Cart class
-        self.session = request.session # A session object that contains cart details
+        self.request = request
+        self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}

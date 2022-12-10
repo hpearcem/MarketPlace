@@ -13,10 +13,12 @@ class CategoryForm(forms.Form):
 
 
 class QuantitySelect(forms.Form):
+    """a from with a value selector for positive quantities"""
     quantity = forms.IntegerField(min_value=0)
 
 
 class OrderCreateForm(forms.ModelForm):
+    """a form to create an order using the user_id"""
     class Meta:
         model = Order
         fields = ['user_id']

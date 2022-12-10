@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Cart{% endblock %}
 {% block content %}
-
+<!--A rudimentary invoice is drawn up so the client can pay-->
 <div class="page-content container">
     <div class="page-header text-blue-d2">
         <h1 class="page-title text-secondary-d1">
@@ -16,11 +16,7 @@
     <div class="container px-0">
         <div class="row mt-4">
             <div class="col-12 col-lg-12">
-
-                <!-- .row -->
-
                 <hr class="row brc-default-l1 mx-n1 mb-4" />
-
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
@@ -28,8 +24,6 @@
                             <span class="text-600 text-110 text-blue align-middle">{{user.username}}</span>
                         </div>
                     </div>
-                    <!-- /.col -->
-
                     <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
                         <hr class="d-sm-none" />
                         <div class="text-grey-m2">
@@ -47,7 +41,6 @@
                                 <span class="text-600 text-90">Issue Date:</span> {{order_date}} </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
 
                 <div class="mt-4">
