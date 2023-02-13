@@ -1,4 +1,6 @@
 from .cart import Cart
+from store.models.product import Products, Category
+from store.forms import CategoryForm, QuantitySelect
 
 
 def cart_total_amount(request):
@@ -12,3 +14,6 @@ def cart_total_amount(request):
         return {'cart_total_amount': total_bill, 'line_total': line_total}
     else:
         return {'cart_total_amount': 0, 'line_total': 0}
+
+
+

@@ -4,6 +4,7 @@ from .models.category import Category
 from .models.order import Order, CartItem
 """"All the database items are registered so django can pick them upin the app"""
 
+
 @admin.register(Products)
 class ProductRegister(admin.ModelAdmin):
     list_display = ("id", "name")

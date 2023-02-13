@@ -40,7 +40,8 @@ class Cart(object):
                 'name': product.name,
                 'price': str(product.price),
                 'quantity': quantity,
-                'line_total': str(float(product.price) * int(quantity))
+                'line_total': str(float(product.price) * int(quantity)),
+                'image': str(product.image)
             }
 
         else:
@@ -61,7 +62,9 @@ class Cart(object):
                     'name': product.name,
                     'quantity': quantity,
                     'price': str(product.price),
-                    'line_total': str(float(product.price) * int(quantity))
+                    'line_total': str(float(product.price) * int(quantity)),
+                    'image': str(product.image)
+
                 }
 
         self.save()
@@ -75,7 +78,6 @@ class Cart(object):
 
     def remove(self, request, product):
         product_id = str(product.id)
-        print(product_id, product, type(product_id), type(product))
         if product_id in request.session['cart'].keys():
             del self.cart[product_id]
             self.save()

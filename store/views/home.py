@@ -13,7 +13,7 @@ def index(request):
         data: All the product date is stored in this library
         detail: the selected product detail as obtained from the details() function
         product: the chosen product obtained from the details() function
-        context: sets up the full view context to be rendered
+        Context: sets up the full view context to be rendered
         """
     if request.method == 'POST':
         products = get_category(request)

@@ -1,20 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<!--A basic signup page to capture new client information-->
-<head>
-    <meta charset="UTF-8">
-    <title>Sign up</title>
-</head>
-<body>
-
-
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}Cart{% endblock %}
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
+
+<main class="pt-5">
+    <div class="container">
+        <h1 class="h5">Sign Up</h1>
+        <div class="row mb-4 border">
+            <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10">
+                <div class="border">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
 {% endblock %}
 
 </body>

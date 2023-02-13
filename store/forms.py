@@ -13,7 +13,7 @@ class CategoryForm(forms.Form):
 
 
 class QuantitySelect(forms.Form):
-    """a from with a value selector for positive quantities"""
+    """a form with a value selector for positive quantities"""
     quantity = forms.IntegerField(min_value=0)
 
 

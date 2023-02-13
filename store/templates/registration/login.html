@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<!--A very basic login template and the built in Django auth
-system is used-->
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+{% extends "../base.html" %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+{% block content %}
 
-</body>
-</html>
+<main class="pt-5">
+    <div class="container">
+        <h1 class="h5">Log In</h1>
+        <div class="row mb-4 border">
+            <div class="col-md-9 col-lg-10 ps-md-3 ps-lg-10">
+                <div class="border">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Log In</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

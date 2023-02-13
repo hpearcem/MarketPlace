@@ -1,6 +1,6 @@
 from django.db import models
-
 from .category import Category
+from django.shortcuts import reverse
 
 
 class Products(models.Model):
@@ -24,7 +24,7 @@ class Products(models.Model):
         __str__: returns the name as a string"""
     name = models.CharField(max_length=255)
     slug = models.SlugField()
-    price = models.FloatField(default=0)
+    price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     description = models.CharField(max_length=250, default='', blank=True, null=True)
     image = models.ImageField(upload_to='media/products/')
@@ -37,8 +37,8 @@ class Products(models.Model):
         verbose_name_plural = "Products"
 
     @staticmethod
-    def get_products_by_id(ids):
-        return Products.objects.get(id__in=ids)
+    def get_products_by_id(id):
+        return Products.objects.get(id__in=id)
 
     @staticmethod
     def get_all_products():
@@ -50,6 +50,11 @@ class Products(models.Model):
             return Products.objects.filter(category=category_id)
         else:
             return Products.get_all_products()
+
+    def get_absolute_url(self):
+        return reverse("core:product", kwargs={
+            'slug': self.slug
+        })
 
     def __str__(self) -> str:
         return self.name
